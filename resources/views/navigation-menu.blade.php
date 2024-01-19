@@ -15,6 +15,27 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link href="{{ route('moduls.index') }}" :active="request()->routeIs('moduls*')">
+                        {{ __('Moduls') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('ufs.index') }}" :active="request()->routeIs('ufs*')">
+                        {{ __('UFs') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('ras.index') }}" :active="request()->routeIs('ras*')">
+                        {{ __('RAs') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('criteris.index') }}" :active="request()->routeIs('criteris*')">
+                        {{ __('Criteris') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('continguts.index') }}" :active="request()->routeIs('continguts*')">
+                        {{ __('Continguts') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('programacions.index') }}" :active="request()->routeIs('programacions*')">
+                        {{ __('Programacions') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('activitats.index') }}" :active="request()->routeIs('activitats*')">
+                        {{ __('Activitats') }}
+                    </x-nav-link>
                 </div>
             </div>
 
