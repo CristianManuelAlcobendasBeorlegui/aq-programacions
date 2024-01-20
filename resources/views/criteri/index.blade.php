@@ -39,8 +39,8 @@
 										<th>Criterion</th>
 										<th>Description</th>
 										<th>Year</th>
-										<th>Modul Id</th>
-										<th>Ra Id</th>
+										<th>Modul</th>
+										<th>Ra</th>
 
                                         <th></th>
                                     </tr>
@@ -53,8 +53,8 @@
 											<td>{{ $criteri->criterion }}</td>
 											<td>{{ $criteri->description }}</td>
 											<td>{{ $criteri->year }}</td>
-											<td>{{ $criteri->modul_id }}</td>
-											<td>{{ $criteri->ra_id }}</td>
+											<td>{{ $criteri->modul->name }}</td>
+											<td>{{ substr($criteri->ra->uf->name, 0, 4) }} - {{ $criteri->ra->name }}</td>
 
                                             <td>
                                                 <form action="{{ route('criteris.destroy',$criteri->id) }}" method="POST">

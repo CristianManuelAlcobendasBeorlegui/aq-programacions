@@ -17,14 +17,20 @@
             {!! $errors->first('year', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('modul_id') }}
-            {{ Form::text('modul_id', $criteri->modul_id, ['class' => 'form-control' . ($errors->has('modul_id') ? ' is-invalid' : ''), 'placeholder' => 'Modul Id']) }}
-            {!! $errors->first('modul_id', '<div class="invalid-feedback">:message</div>') !!}
+            <label for="modul_id">Modul</label>
+            <select class="form-control" name="modul_id" id="modul_id">
+                @foreach (\App\Models\Modul::all() as $modul)
+                    <option value="{{ $modul->id }}" {{ $modul->id == $modul->modul_id ? 'selected' : '' }}>{{ $modul->name }}</option>
+                @endforeach
+            </select>
         </div>
         <div class="form-group">
-            {{ Form::label('ra_id') }}
-            {{ Form::text('ra_id', $criteri->ra_id, ['class' => 'form-control' . ($errors->has('ra_id') ? ' is-invalid' : ''), 'placeholder' => 'Ra Id']) }}
-            {!! $errors->first('ra_id', '<div class="invalid-feedback">:message</div>') !!}
+            <label for="ra_id">RA</label>
+            <select class="form-control" name="ra_id" id="ra_id">
+                @foreach (\App\Models\Ra::all() as $ra)
+                    <option value="{{ $ra->id }}" {{ $ra->id == $ra->ra_id ? 'selected' : '' }}>{{ substr($ra->uf->name, 0, 4) }} - {{ $ra->name }}</option>
+                @endforeach
+            </select>
         </div>
 
     </div>
@@ -32,3 +38,44 @@
         <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
     </div>
 </div>
+<script>
+    // === DOM ELEMENTS === //
+    const selectModulId = document.getElementById("modul_id");
+    const selectRaId = document.getElementById("ra_id");
+    const vModuls = JSON.parse(`{!! json_encode(\App\Models\Modul::all()) !!}`);
+    const vUfs = JSON.parse(`{!! json_encode(\App\Models\Uf::all()) !!}`);
+    const vRas = JSON.parse(`{!! json_encode(\App\Models\Ra::all()) !!}`);
+
+    // === EVENTS === //
+    selectModulId.addEventListener("change", changeRaOptions, false);
+
+    // === METHODS === //
+
+    /** 
+     * Change RAs values with MODUL_ID data related
+     * */
+    function changeRaOptions() {
+        let f, c;
+        selectRaId.innerHTML = '';
+        for (f = 0; f < vUfs.length; f++) {
+            if (vUfs[f]['modul_id'] == selectModulId.value) {
+                for (c = 0; c < vRas.length; c++) {
+                    if (vRas[c]['uf_id'] == vUfs[f]['id']) {
+                        selectRaId.innerHTML += `<option value="` + vRas[c]['id'] + `"}>` + vUfs[f]['name'].substr(0, 3) + ` - ` + vRas[c]['name'] + `</option>`;
+                    }
+                }
+            }
+        }
+    }
+
+    function getPositionElementID(array, id) {
+        let pos = -1; 
+        for (f = 0; f < array.length && pos == -1; f++) {
+            if (array[f].id == id) {
+                pos = f;
+            }
+        }
+        return pos;
+    }
+    changeRaOptions();
+</script>
