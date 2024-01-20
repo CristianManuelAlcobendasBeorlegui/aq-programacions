@@ -12,9 +12,12 @@
             {!! $errors->first('description', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('uf_id') }}
-            {{ Form::text('uf_id', $ra->uf_id, ['class' => 'form-control' . ($errors->has('uf_id') ? ' is-invalid' : ''), 'placeholder' => 'Uf Id']) }}
-            {!! $errors->first('uf_id', '<div class="invalid-feedback">:message</div>') !!}
+            <label for="uf_id">UF</label>
+            <select class="form-control" name="uf_id" id="uf_id">
+                @foreach (\App\Models\Uf::all() as $uf)
+                    <option value="{{ $uf->id }}" {{ $uf->id == $uf->modul_id ? 'selected' : '' }}>{{ substr($uf->modul->name, 0, 4) }} - {{ $uf->name }}</option>
+                @endforeach
+            </select>
         </div>
 
     </div>

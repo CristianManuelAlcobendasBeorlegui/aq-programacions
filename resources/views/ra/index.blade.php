@@ -38,7 +38,7 @@
                                         
 										<th>Name</th>
 										<th>Description</th>
-										<th>Uf Id</th>
+										<th>Uf</th>
 
                                         <th></th>
                                     </tr>
@@ -50,7 +50,7 @@
                                             
 											<td>{{ $ra->name }}</td>
 											<td>{{ $ra->description }}</td>
-											<td>{{ $ra->uf_id }}</td>
+											<td>{{ substr($ra->uf->modul->name, 0, 4) }} - {{ $ra->uf->name }}</td>
 
                                             <td>
                                                 <form action="{{ route('ras.destroy',$ra->id) }}" method="POST">
