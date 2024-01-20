@@ -12,9 +12,13 @@
             {!! $errors->first('description', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('ra_id') }}
-            {{ Form::text('ra_id', $contingut->ra_id, ['class' => 'form-control' . ($errors->has('ra_id') ? ' is-invalid' : ''), 'placeholder' => 'Ra Id']) }}
-            {!! $errors->first('ra_id', '<div class="invalid-feedback">:message</div>') !!}
+            <label for="ra_id">RA</label>
+            <select class="form-control" name="ra_id" id="ra_id">
+                @foreach (\App\Models\Ra::all() as $ra)
+                    <option value="{{ $ra->id }}" {{ $ra->id == $ra->ra_id ? 'selected' : '' }}>{{ substr($ra->uf->modul->name, 0, 4) }} - {{ substr($ra->uf->name, 0, 4) }} - {{ $ra->name }}</option>
+                @endforeach
+            </select>
+
         </div>
 
     </div>

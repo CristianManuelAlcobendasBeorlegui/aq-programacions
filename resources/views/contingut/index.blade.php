@@ -38,7 +38,7 @@
                                         
 										<th>Content</th>
 										<th>Description</th>
-										<th>Ra Id</th>
+										<th>Ra</th>
 
                                         <th></th>
                                     </tr>
@@ -50,7 +50,7 @@
                                             
 											<td>{{ $contingut->content }}</td>
 											<td>{{ $contingut->description }}</td>
-											<td>{{ $contingut->ra_id }}</td>
+											<td>{{ substr($contingut->ra->uf->modul->name, 0, 4) }} - {{ substr($contingut->ra->uf->name, 0, 4) }} - {{ $contingut->ra->name }}</td>
 
                                             <td>
                                                 <form action="{{ route('continguts.destroy',$contingut->id) }}" method="POST">
