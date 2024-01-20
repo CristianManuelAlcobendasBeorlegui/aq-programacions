@@ -43,9 +43,38 @@ class ActivitatController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Activitat::$rules);
+        // request()->validate(Activitat::$rules);
 
+        $validateData = $request->validate([
+            'name' => 'required',
+            'hours' => 'required',
+            'programacion_id' => 'required',
+            'uf_id' => 'required',
+            'ras' => 'nullable|array',
+            'ras.*' => 'exists:ras,id',
+            'criteris' => 'nullable|array',
+            'criteris.*' => 'exists:criteris,id',
+            'continguts' => 'nullable|array',
+            'continguts.*' => 'exists:continguts,id',
+        ]);
+
+        // Create new activitat
         $activitat = Activitat::create($request->all());
+
+        // Sync RAS data
+        if (!empty($validatedData['ras'])) {
+            $activitat->ras()->sync($validatedData['ras']);
+        }
+
+        // Sync content data
+        if (!empty($validatedData['continguts'])) {
+            $activitat->ras()->sync($validatedData['continguts']);
+        }
+
+        // Sync criterion data
+        if (!empty($validatedData['criteris'])) {
+            $activitat->ras()->sync($validatedData['criteris']);
+        }
 
         return redirect()->route('activitats.index')
             ->with('success', 'Activitat created successfully.');

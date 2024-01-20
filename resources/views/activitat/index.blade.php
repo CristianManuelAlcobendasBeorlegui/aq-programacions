@@ -40,9 +40,10 @@
 										<th>Description</th>
 										<th>Hours</th>
 										<th>Programacion Id</th>
-										<th>Uf Id</th>
-										<th>Criteri Ids</th>
-										<th>Continguts Ids</th>
+										<th>Uf</th>
+										<th>Ra</th>
+										<th>Criteri</th>
+										<th>Continguts</th>
 
                                         <th></th>
                                     </tr>
@@ -55,10 +56,11 @@
 											<td>{{ $activitat->name }}</td>
 											<td>{{ $activitat->description }}</td>
 											<td>{{ $activitat->hours }}</td>
-											<td>{{ $activitat->programacion_id }}</td>
-											<td>{{ $activitat->uf_id }}</td>
-											<td>{{ $activitat->criteri_ids }}</td>
-											<td>{{ $activitat->continguts_ids }}</td>
+											<td>{{ $activitat->programacion->year }} - {{ $activitat->programacion->modul->name }}</td>
+											<td>{{ $activitat->uf->name }}</td>
+											<td>{{ $activitat->ra->name }}</td>
+											<td>{{ $activitat->criteri->criterion }}</td>
+											<td>{{ $activitat->contingut->content }}</td>
 
                                             <td>
                                                 <form action="{{ route('activitats.destroy',$activitat->id) }}" method="POST">

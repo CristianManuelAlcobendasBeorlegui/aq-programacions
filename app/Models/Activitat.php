@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property $hours
  * @property $programacion_id
  * @property $uf_id
+ * @property $ra_ids
  * @property $criteri_ids
  * @property $continguts_ids
  * @property $created_at
@@ -24,6 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Contingut $contingut
  * @property Criteri $criteri
  * @property Programacion $programacion
+ * @property Ra $ra
  * @property Uf $uf
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
@@ -36,8 +38,9 @@ class Activitat extends Model
 		'hours' => 'required',
 		'programacion_id' => 'required',
 		'uf_id' => 'required',
+		'ra_ids' => 'required',
 		'criteri_ids' => 'required',
-		'continguts_ids' => 'required',
+		'contingut_ids' => 'required',
     ];
 
     protected $perPage = 20;
@@ -47,7 +50,7 @@ class Activitat extends Model
      *
      * @var array
      */
-    protected $fillable = ['name','description','hours','programacion_id','uf_id','criteri_ids','continguts_ids'];
+    protected $fillable = ['name','description','hours','programacion_id','uf_id','ra_ids','criteri_ids','contingut_ids'];
 
 
     /**
@@ -79,7 +82,7 @@ class Activitat extends Model
      */
     public function contingut()
     {
-        return $this->hasOne('App\Models\Contingut', 'id', 'continguts_ids');
+        return $this->hasOne('App\Models\Contingut', 'id', 'contingut_ids');
     }
     
     /**
@@ -96,6 +99,14 @@ class Activitat extends Model
     public function programacion()
     {
         return $this->hasOne('App\Models\Programacion', 'id', 'programacion_id');
+    }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function ra()
+    {
+        return $this->hasOne('App\Models\Ra', 'id', 'ra_ids');
     }
     
     /**

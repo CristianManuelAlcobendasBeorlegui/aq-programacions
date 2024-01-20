@@ -41,6 +41,10 @@
                             {{ $activitat->uf_id }}
                         </div>
                         <div class="form-group">
+                            <strong>Ra Ids:</strong>
+                            {{ $activitat->ra_ids }}
+                        </div>
+                        <div class="form-group">
                             <strong>Criteri Ids:</strong>
                             {{ $activitat->criteri_ids }}
                         </div>
