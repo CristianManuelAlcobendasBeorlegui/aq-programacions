@@ -18,8 +18,9 @@ return new class extends Migration
             $table->integer('hours');
             $table->foreignId('programacion_id')->constrained();
             $table->foreignId('uf_id')->constrained();
+            $table->foreignId('ra_ids')->constrained();
             $table->foreignId('criteri_ids')->constrained();
-            $table->foreignId('continguts_ids')->constrained();
+            $table->foreignId('contingut_ids')->constrained();
             $table->timestamps();
         });
         Schema::create('activitat_ra', function(Blueprint $table) {
