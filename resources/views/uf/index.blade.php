@@ -39,7 +39,7 @@
 										<th>Name</th>
 										<th>Description</th>
 										<th>Hours</th>
-										<th>Modul Id</th>
+										<th>Modul</th>
 
                                         <th></th>
                                     </tr>
@@ -52,7 +52,7 @@
 											<td>{{ $uf->name }}</td>
 											<td>{{ $uf->description }}</td>
 											<td>{{ $uf->hours }}</td>
-											<td>{{ $uf->modul_id }}</td>
+											<td>{{ $uf->modul->name }}</td>
 
                                             <td>
                                                 <form action="{{ route('ufs.destroy',$uf->id) }}" method="POST">

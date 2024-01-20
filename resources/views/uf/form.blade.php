@@ -17,9 +17,12 @@
             {!! $errors->first('hours', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('modul_id') }}
-            {{ Form::text('modul_id', $uf->modul_id, ['class' => 'form-control' . ($errors->has('modul_id') ? ' is-invalid' : ''), 'placeholder' => 'Modul Id']) }}
-            {!! $errors->first('modul_id', '<div class="invalid-feedback">:message</div>') !!}
+            <label for="modul_id">Modul</label>
+            <select class="form-control" name="modul_id" id="modul_id">
+                @foreach (\App\Models\Modul::all() as $modul)
+                <option value="{{ $modul->id }}" {{ $modul->id == $uf->modul_id ? 'selected' : '' }}>{{ $modul->name }}</option>
+                @endforeach
+            </select>
         </div>
 
     </div>
