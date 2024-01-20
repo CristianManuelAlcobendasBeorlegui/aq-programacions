@@ -12,14 +12,18 @@
             {!! $errors->first('description', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('modul_id') }}
-            {{ Form::text('modul_id', $programacion->modul_id, ['class' => 'form-control' . ($errors->has('modul_id') ? ' is-invalid' : ''), 'placeholder' => 'Modul Id']) }}
-            {!! $errors->first('modul_id', '<div class="invalid-feedback">:message</div>') !!}
+            <label for="modul_id">Modul</label>
+            <select class="form-control" name="modul_id" id="modul_id">
+                @foreach (\App\Models\Modul::all() as $modul)
+                <option value="{{ $modul->id }}" {{ $modul->id == $modul->modul_id ? 'selected' : '' }}>{{ $modul->name }}</option>
+                @endforeach
+            </select>
         </div>
         <div class="form-group">
-            {{ Form::label('user_id') }}
-            {{ Form::text('user_id', $programacion->user_id, ['class' => 'form-control' . ($errors->has('user_id') ? ' is-invalid' : ''), 'placeholder' => 'User Id']) }}
-            {!! $errors->first('user_id', '<div class="invalid-feedback">:message</div>') !!}
+            <label for="user_id">User</label>
+            <select class="form-control" name="user_id" id="user_id">
+                <option value="{{ Auth::user()->id }}" selected>{{ Auth::user()->name }}</option>
+            </select>
         </div>
 
     </div>

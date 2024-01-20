@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property Activitat[] $activitats
  * @property Modul $modul
+ * @property User $user
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
@@ -53,6 +54,14 @@ class Programacion extends Model
     public function modul()
     {
         return $this->hasOne('App\Models\Modul', 'id', 'modul_id');
+    }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function user()
+    {
+        return $this->hasOne('App\Models\User', 'id', 'user_id');
     }
     
 
